@@ -13,6 +13,9 @@ spring:
     # Keep the connection alive if idle for a long time (needed in production)
     testWhileIdle: true
     validationQuery: SELECT 1
+  queries:
+    users-query: select email, password, active from user where email=?
+    roles-query: select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
 
 # ===============================
 # = JPA / HIBERNATE

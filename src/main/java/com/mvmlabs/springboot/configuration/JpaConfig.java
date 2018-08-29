@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableJpaRepositories(basePackages = {"com.rutul.booking.server.domain.sql"})
-@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
+@EnableJpaRepositories(basePackages = {"com.mvmlabs.springboot.domain.sql"})
 @EnableTransactionManagement
 @Configuration
 public class JpaConfig {

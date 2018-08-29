@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.Ordered;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -17,13 +18,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("forward:/app-index.html");
+		registry.addViewController("/").setViewName("login");
 		registry.addViewController("/login").setViewName("forward:/app-index.html");
 		registry.addViewController("/index").setViewName("forward:/app-index.html");
 		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 	}
 
-	@Bean
+	/*@Bean
 	@Primary
 	public ServletRegistrationBean dispatcherRegistration(@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") DispatcherServlet dispatcherServlet) {
 		ServletRegistrationBean registration = new ServletRegistrationBean(dispatcherServlet);
@@ -34,7 +35,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		return new CommonsMultipartResolver();
-	}
+	}*/
 
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }
