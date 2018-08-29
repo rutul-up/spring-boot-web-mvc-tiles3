@@ -10,7 +10,7 @@
 		<put-attribute name="title" value="Spring Web MVC with Tiles 3" />
 		<put-attribute name="header" value="/WEB-INF/tiles/view/header.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/tiles/view//footer.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/view/footer.jsp" />
 	</definition>
 	
 	<!-- Pages -->	

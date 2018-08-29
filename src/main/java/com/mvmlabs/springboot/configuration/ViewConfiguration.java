@@ -1,4 +1,4 @@
-package com.mvmlabs.springboot;
+package com.mvmlabs.springboot.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  * @author Mark Meany
  */
 @Configuration
-public class ConfigurationForTiles {
+public class ViewConfiguration {
 
     /**
      * Initialise Tiles on application startup and identify the location of the tiles configuration file, tiles.xml.
