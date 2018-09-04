@@ -1,0 +1,35 @@
+<table class="table-condensed table-data" style="width: 100%">
+	<thead>
+	<tr ng-if="title">
+		<th style="text-align: center !important;" colspan="2">
+			{{title}}
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr style="border: 1px solid #ddd;">
+		<th>
+			Request Query
+		</th>
+		<td>
+			<span http-query-request-log="httpQueryLog.requestLog"></span>
+		</td>
+	</tr>
+	<tr style="border: 1px solid #ddd;">
+		<th>
+			Response Query
+		</th>
+		<td>
+			<span http-query-response-log="httpQueryLog.responseLog"></span>
+		</td>
+	</tr>
+	<tr style="border: 1px solid #ddd;">
+		<th>
+			Comments
+		</th>
+		<td>
+			<span http-query-comments="httpQueryLog.comments"></span>
+		</td>
+	</tr>
+	</tbody>
+</table>

@@ -1,0 +1,25 @@
+<table class="select-filter">
+	<tr>
+		<td style="border-right: none;">
+			<input type="text" class="form-control select-filter-input" placeholder="{{placeholder}}"
+				   ng-disabled="ngDisabled"
+				   ng-model="member"
+				   uib-typeahead="member as stringify(member) for member in searchMembers($viewValue) | limitTo:limit"
+				   typeahead-editable="false"
+				   typeahead-loading="loading"
+				   typeahead-on-select="memberSelected()"
+				   typeahead-template-url="typeaheadMemberSelectorTemplate.html"
+				   ng-class="{magnifier: magnifier}">
+		</td>
+		<td ng-if="loading">
+			<span class="select-filter-loading"></span>
+		</td>
+		<td ng-if="member">
+			<span class="select-filter-clearer" ng-click="clear()"></span>
+		</td>
+	</tr>
+</table>
+
+<script type="text/ng-template" id="typeaheadMemberSelectorTemplate.html">
+	<a href="" class="display-member-type-icon" memberType="{{match.model.memberType.code}}" ng-bind-html="match.label | uibTypeaheadHighlight:query"> </a>
+</script>

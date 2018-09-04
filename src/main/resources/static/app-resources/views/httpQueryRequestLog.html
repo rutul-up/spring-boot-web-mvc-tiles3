@@ -1,0 +1,17 @@
+<table style="width: 100%" class="table-data">
+	<tr>
+		<td>
+			<span ellipsis="requestLog.endpoint" ellipsis-length="150" ellipsis-title="Endpoint"></span>
+		</td>
+	</tr>
+	<tr ng-repeat="(key, value)  in requestLog.headers">
+		<td>
+			{{key}}: <span ellipsis="value" ellipsis-length="150" ellipsis-title="{{key}}"></span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span ellipsis="requestLog.body" ellipsis-length="150" ellipsis-title="Body"></span>
+		</td>
+	</tr>
+</table>

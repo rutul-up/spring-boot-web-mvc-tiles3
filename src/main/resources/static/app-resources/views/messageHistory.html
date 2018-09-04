@@ -1,0 +1,66 @@
+<div class="container-fluid ng-hide"  ng-hide="false" ng-init="init();">
+    <div class="page-header">
+        <h1>{{channelUrl}} Message History</h1>
+    </div>
+    <div style="padding: 10px; margin-top: 30px;">
+        <table ng-table="tableParams" class="table table-hover table-condensed table-striped table-data">
+            <thead>
+
+            <th style="width: 200px;">User Sent</th>
+            <th style="width: 200px;">User Received</th>
+            <th style="width: 150px;">Message</th>
+            <th style="width: 100px;">Date and Time</th>
+            <th style="width: 100px;">Status</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in $data track by row.messageId"  style="cursor: pointer">
+
+                <td>
+                    {{row.senderUser.nickname}}
+                </td>
+                <td>
+                    {{row.recipientUser.nickname}}
+                </td>
+                <td>
+
+                    <pre>{{row.messageBody.originalMessage}}</pre>
+                    <div class="card" ng-if="row.messageBody.type">
+                        {{attachment = row.messageBody.attachment;""}}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {{attachment.estimatedDepartureTime | date:"EEE, MMM dd, yyyy"}}
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                {{attachment.estimatedDepartureTime | date:"DEPARTURE h:mm a"}}<br/>
+                                {{attachment.fromCity}}, {{attachment.fromState}}<br/>
+                                {{attachment.fromCode}}<br/>
+                            </div>
+                            <div class="col-sm-2">
+                                <span class="glyphicon glyphicon-arrow-right"></span>
+                            </div>
+                            <div class="col-sm-5">
+                                {{attachment.estimatedArrivalTime | date:"EST. ARRIVAL h:mm a"}}<br/>
+                                {{attachment.toCity}}, {{attachment.toState}}<br/>
+                                {{attachment.toCode}}<br/>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    {{row.createDateLong | date:"MM/dd/yyyy 'at' h:mma"}}
+                </td>
+                <td>
+                    {{row.read ? 'Read' : 'Unread'}}
+                </td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>

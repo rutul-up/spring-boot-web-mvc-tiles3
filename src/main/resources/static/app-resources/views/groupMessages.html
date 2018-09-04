@@ -1,0 +1,152 @@
+<div class="container-fluid ng-hide" ng-controller="GroupMessageController"  ng-hide="false" ng-init="init();">
+
+    <div class="col-lg-12">
+        <div class="panel panel-default" style="border: 1px solid #5C6F8C; padding-bottom: 40px;">
+            <div style="padding: 10px;">
+
+
+
+
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="col-sm-6 col-md-6 col-lg-6 searchContainer">
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="searchInvoiceMember">Member Name:</label>
+                                <div class="col-sm-9">
+                                    <select-member id="searchInvoiceMember" ng-model="searchMember" limit="20" placeholder="SELECT MEMBER" magnifier="true"></select-member>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="searchStatus">Status:</label>
+                                <div class="col-sm-9">
+                                    <select id="searchStatus" title="Select Autopay Status" class="form-control"
+                                            ng-model="searchStatus"
+                                            ng-options="option.value as option.display for option in searchStatusOptions">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="searchKeyword">Keyword:</label>
+                                <div class="col-sm-9">
+                                    <input id="searchKeyword" class="form-control" ng-model="searchKeyword">
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-offset-3">
+                                <button class="btn btn-primary" ng-click="search();">Search</button>
+                                <button class="btn btn-primary" ng-click="reset();">Reset</button>
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div style="padding: 10px; margin-top: 30px;">
+
+
+
+
+
+                <table ng-table="tableParams" class="table table-hover table-condensed table-striped table-data">
+
+                    <tbody ng-show="$data.length === 0">
+                    <tr>
+                        <td>no results found</td>
+                    </tr>
+                    </tbody>
+
+
+                    <thead ng-show="$data.length !== 0">
+                        <th style="width: 200px;" ng-click="setSort('senderUserProfileName');" ng-class="{ 'sortColumnSelected': sortBy === 'senderUserProfileName' }">
+                            User Sent
+                            <sort-indicator class="sortIndicator" selected="sortBy === 'senderUserProfileName'" desc="desc"></sort-indicator>
+                        </th>
+                        <th style="width: 200px;" ng-click="setSort('recipientUserProfileName');" ng-class="{ 'sortColumnSelected': sortBy === 'recipientUserProfileName' }">
+                            User Received
+                            <sort-indicator class="sortIndicator" selected="sortBy === 'recipientUserProfileName'" desc="desc"></sort-indicator>
+                        </th>
+                        <th style="width: 150px;">
+                            Message
+                        </th>
+                        <th style="width: 100px;" ng-click="setSort('channel');" ng-class="{ 'sortColumnSelected': sortBy === 'channel' }">
+                            Channel
+                            <sort-indicator class="sortIndicator" selected="sortBy === 'channel'" desc="desc"></sort-indicator>
+                        </th>
+                        <th style="width: 100px;" ng-click="setSort('createDate');" ng-class="{ 'sortColumnSelected': sortBy === 'createDate' }">
+                            Date and Time
+                            <sort-indicator class="sortIndicator" selected="sortBy === 'createDate'" desc="desc"></sort-indicator>
+                        </th>
+                        <th style="width: 100px;" ng-click="setSort('status');" ng-class="{ 'sortColumnSelected': sortBy === 'status' }">
+                            Status
+                            <sort-indicator class="sortIndicator" selected="sortBy === 'status'" desc="desc"></sort-indicator>
+                        </th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="row in $data track by row.messageId"  style="cursor: pointer">
+
+                        <td>
+                            {{row.senderUser.nickname}}
+                        </td>
+                        <td>
+                            {{row.recipientUser.nickname}}
+                        </td>
+                        <td width="800px">
+                            <pre>{{row.messageBody.originalMessage}}</pre>
+                            <div class="card" ng-if="row.messageBody.type">
+                                {{attachment = row.messageBody.attachment;""}}
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{attachment.estimatedDepartureTime | date:"EEE, MMM dd, yyyy"}}
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        {{attachment.estimatedDepartureTime | date:"DEPARTURE h:mm a"}}<br/>
+                                        {{attachment.fromCity}}, {{attachment.fromState}}<br/>
+                                        {{attachment.fromCode}}<br/>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <span class="glyphicon glyphicon-arrow-right"></span>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        {{attachment.estimatedArrivalTime | date:"EST. ARRIVAL h:mm a"}}<br/>
+                                        {{attachment.toCity}}, {{attachment.toState}}<br/>
+                                        {{attachment.toCode}}<br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <a ng-href="#!/channel/{{row.channelUrl}}" class="display-member-type-icon">{{row.channelUrl}}</a>
+                        </td>
+                        <td width="200px">
+                            {{row.createDateLong | date:"MM/dd/yyyy 'at' h:mma"}}
+                        </td>
+                        <td>
+                            {{row.read ? 'Read' : 'Unread'}}
+                        </td>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!--<div id="collapseOne" class="panel-collapse collapse in">-->
+            <!--<div class="panel-body">-->
+            <!--<div ng-include="'/admin/resources/template/shuttles/shuttleListTable.html'"></div>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
